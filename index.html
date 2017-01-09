@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <link href="build/nv.d3.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="stylesheets/jqcloud.css" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
-    <script src="
-                 build/nv.d3.js"></script>
+    <script src="build/nv.d3.js"></script>
     <script src="lib/stream_layers.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script src="lib/jqcloud-1.0.4.js"></script>
 
     <style>
         text {
@@ -16,19 +18,39 @@
             display: block;
         }
         html, body, #chart, svg {
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
-            width: 100%;
+            margin: 10px;
+            padding: 10px;
+            height: 90%;
+            width: 90%
         }
     </style>
+    
 </head>
 <body>
 
-<div id="chart" class='with-3d-shadow with-transitions'>
+<div id="chart" class='with-3d-shadow with-transitions' style="width:75%: height: 80%">
     <svg></svg>
 </div>
+    
+<div id="cloud" style="width: 550px; height: 350px; border: 1px solid #ccc; text-align: center;">
 
+</div>
+<script>
+    
+var words = [
+  {text: "Lorem", weight: 13, link: "#"},
+  {text: "Ipsum", weight: 10.5, link: "#"},
+  {text: "Dolor", weight: 9.4, link: "#"},
+  {text: "Sit", weight: 8, link: "#"},
+  {text: "Amet", weight: 6.2, link: "#"},
+  {text: "Consectetur", weight: 5, link: "#"},
+  {text: "Adipiscing", weight: 5, link: "#"}
+];
+
+  $(function() {
+        $("#cloud").jQCloud(words);
+      });
+</script>
 <script>
 
     nv.addGraph(function() {
