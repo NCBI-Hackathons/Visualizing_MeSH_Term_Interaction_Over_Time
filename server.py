@@ -1,6 +1,4 @@
 import os, cherrypy
-from itertools import chain
-
 from pymongo import MongoClient
 from json import dumps
 from cherrypy.lib import static
@@ -47,10 +45,17 @@ def word_cloud(start, end, terms):
             {'$match': {'year': {'$gt': start, '$lt': end}, 'mesh': {'$all': terms}}},
             {'$project': {'_id': 0, 'mesh': 1}},
             {'$unwind': '$mesh'},
-            {'$group': {'_id': "$mesh", 'count': {'$sum': 1}}},
-            {'$sort': {'count': -1}},
+            {'$group': {'_id': "$mesh", 'weight': {'$sum': 1}}},
+            {'$sort': {'weight': -1}},
     ])
-    results = [r for r in res][:25]
+    #results = [r for r in res][:25]
+    results = []
+    for r in res:
+        r['text'] = r['_id']
+        del r['_id']
+        r['link'] = "#"
+        results.append(r)
+    results = results[:25]
     return dumps(results)
 
 class HelloWorld(object):
@@ -80,5 +85,4 @@ cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction
 
 cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
 #print(counts('Electroretinography;Neoplasm Metastasis'))
-
 #print(word_cloud(1965, 2010, ['Ebolavirus']))

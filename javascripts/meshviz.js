@@ -31,7 +31,11 @@ $('#viz-button').click(function(sender, e){
     $('#viz-button').text('loading ..');
     query = query.replace(",", "|");
     
+<<<<<<< HEAD
     var freq_url = "/freqs?terms="+query;
+=======
+    var url = "http://127.0.0.1:9090/freqs?terms="+query;
+>>>>>>> 8d68dbc0ac097c239ea42720d8de3fae48fcffa8
 
     var jqxhr = $.get(freq_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data)["data"];
