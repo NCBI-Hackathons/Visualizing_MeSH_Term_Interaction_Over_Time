@@ -60,8 +60,8 @@ class HelloWorld(object):
         return counts(terms)
 
     @cherrypy.expose()
-    def auto_complete(self, starter):
-        return dumps([s for s in auto_complete_list if s.startswith(starter)][:3])
+    def auto_complete(self, term):
+        return dumps([s for s in auto_complete_list if s.startswith(term)][:3])
 
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
@@ -76,5 +76,7 @@ cherrypy.server.socket_host = '0.0.0.0'
 cherrypy.config.update({'server.socket_port': 1234})
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
+css_handler = cherrypy.tools.staticdir.handler(section="/", dir='/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time')
+cherrypy.tree.mount(css_handler, '')
 cherrypy.quickstart(HelloWorld())
 #print(counts('Electroretinography;Neoplasm Metastasis'))
