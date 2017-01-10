@@ -1,8 +1,8 @@
-[/] 
+[/]
 tools.staticdir.root = "/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time"
 
-[/images] 
-tools.staticdir.on = True 
+[/images]
+tools.staticdir.on = True
 tools.staticdir.dir = "images"
 
 [/javascripts]
