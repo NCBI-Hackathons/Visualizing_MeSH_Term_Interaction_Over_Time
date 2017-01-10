@@ -31,9 +31,9 @@ $('#viz-button').click(function(sender, e){
     $('#viz-button').text('loading ..');
     query = query.replace(",", "|");
     
-    var url = "http://127.0.0.1:9090/freqs?terms="+query;
+    var freq_url = "/freqs?terms="+query;
 
-    var jqxhr = $.get(url , function(data,textStatus,jqXHR) {
+    var jqxhr = $.get(freq_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data)["data"];
         nv.addGraph(function() {
             var chart = nv.models.lineWithFocusChart();
@@ -51,7 +51,30 @@ $('#viz-button').click(function(sender, e){
     }).fail(function(data, error){
         alert(JSON.stringify(data));
     });
- 
+    
+    var cloud_url = "/wcloud?start=1985&end=1995&qterms="+query;
+    
+    
+    var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
+        my_data = JSON.parse(data)["data"];
+        
+        /*var words = [
+            {text: "Abdo", weight: 13, link: "#"},
+            {text: "Ipsum", weight: 10.5, link: "#"},
+            {text: "Dolor", weight: 9.4, link: "#"},
+            {text: "Sit", weight: 8, link: "#"},
+            {text: "Amet", weight: 6.2, link: "#"},
+            {text: "Consectetur", weight: 5, link: "#"},
+            {text: "Adipiscing", weight: 5, link: "#"}
+        ];*/
+
+        $(function() {
+            $("#cloud").jQCloud(my_data);
+        });
+        
+    }).fail(function(data, error){
+        alert(JSON.stringify(data));
+    });
     
     /*nv.addGraph(function() {
     var chart = nv.models.lineWithFocusChart();
