@@ -33,9 +33,9 @@ def counts(term_str):
             )
             values = [{'x': r['_id'], 'y': r['count']} for r in res]
             found_years = [r['_id'] for r in res]
-            for year in range(a, b):
-                if not year in found_years:
-                    values.append({'x': year, 'y': 0})
+            # for year in range(a, b):
+            #     if not year in found_years:
+            #         values.append({'x': year, 'y': 0})
             results.append({'key': 'co-occurrence', 'values': values}) if '|' in term else results.append({'key': term, 'values': values})
 
         return dumps({
