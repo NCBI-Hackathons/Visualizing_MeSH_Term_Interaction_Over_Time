@@ -59,5 +59,5 @@ class HelloWorld(object):
 
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
-#cherrypy.quickstart(HelloWorld())
-print(counts('Electroretinography;Neoplasm Metastasis'))
+cherrypy.quickstart(HelloWorld())
+#print(counts('Electroretinography;Neoplasm Metastasis'))
