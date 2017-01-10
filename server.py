@@ -1,12 +1,17 @@
-import cherrypy
+import os, cherrypy
+from itertools import chain
+
 from pymongo import MongoClient
 from json import dumps
+from cherrypy.lib import static
 
+path = os.path.abspath(os.path.dirname(__file__))
 db = MongoClient()['pubmed']
 
+auto_complete_list = ['One', 'Orange', 'Two', 'Tree', 'Three']
+
 def counts(term_str):
-    a = 1965
-    b = 2015
+    start_year = 1965; end_year = 2015
     try:
         terms = [s.strip() for s in term_str.split('|')]
         terms.extend([term_str])
@@ -14,28 +19,18 @@ def counts(term_str):
         results = []
         for term in terms:
             qterms = [s.strip() for s in term_str.split('|')] if '|' in term else [term]
-            res = db.article.aggregate(
-               [
-                {
-                  '$match': {
-                    'year': {'$gt': a - 1, '$lt': b + 1 },
-                    'mesh': {'$all': qterms}
-                    }
-                },
-                {
-                  '$group': {
-                     '_id': "$year",
-                     "count": {"$sum": 1}
-                  }
-                },
-                {'$sort': {'_id': 1}}
-               ]
-            )
+            res = db.article.aggregate([{
+                '$match': {
+                'year': {'$gt': start_year - 1, '$lt': end_year + 1 },
+                'mesh': {'$all': qterms}
+            }},{
+                '$group': {
+                    '_id': "$year",
+                    "count": {"$sum": 1}
+                }},{
+                '$sort': {'_id': 1}
+            }])
             values = [{'x': r['_id'], 'y': r['count']} for r in res]
-            found_years = [r['_id'] for r in res]
-            # for year in range(a, b):
-            #     if not year in found_years:
-            #         values.append({'x': year, 'y': 0})
             results.append({'key': 'co-occurrence', 'values': values}) if '|' in term else results.append({'key': term, 'values': values})
 
         return dumps({
@@ -54,8 +49,12 @@ class HelloWorld(object):
         return counts(terms)
 
     @cherrypy.expose()
+    def auto_complete(self, starter):
+        return [s.startswith(starter) for s in auto_complete_list][:3]
+
+    @cherrypy.expose
     def index(self):
-        return 'Hello World!'
+        return static.serve_file(os.path.join(path, 'index.html'))
 
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
