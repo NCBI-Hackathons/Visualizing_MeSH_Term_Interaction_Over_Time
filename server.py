@@ -50,7 +50,6 @@ def word_cloud(start, end, terms):
             {'$group': {'_id': "$mesh", 'weight': {'$sum': 1}}},
             {'$sort': {'weight': -1}},
     ])
-    #results = [r for r in res][:25]
     results = []
     for r in res:
         r['text'] = r['_id']
@@ -68,7 +67,8 @@ class HelloWorld(object):
 
     @cherrypy.expose()
     def auto_complete(self, term):
-        return dumps([s for s in auto_complete_list if s.startswith(term)][:3])
+        term = term[term.rfind(',') + 1:].strip()
+        return dumps([s.replace(',', '_') for s in auto_complete_list if s.startswith(term)][:10])
 
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
