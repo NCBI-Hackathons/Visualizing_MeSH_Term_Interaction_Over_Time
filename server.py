@@ -8,12 +8,12 @@ def counts(term_str):
     a = 1965
     b = 2015
     try:
-        terms = [s.strip() for s in term_str.split(',')]
+        terms = [s.strip() for s in term_str.split('|')]
         terms.extend([term_str])
 
         results = []
         for term in terms:
-            qterms = [s.strip() for s in term_str.split(',')] if ',' in term else [term]
+            qterms = [s.strip() for s in term_str.split('|')] if '|' in term else [term]
             res = db.article.aggregate(
                [
                 {
@@ -36,7 +36,7 @@ def counts(term_str):
             for year in range(a, b):
                 if not year in found_years:
                     values.append({'x': year, 'y': 0})
-            results.append({'key': 'co-occurrence', 'values': values}) if ',' in term else results.append({'key': term, 'values': values})
+            results.append({'key': 'co-occurrence', 'values': values}) if '|' in term else results.append({'key': term, 'values': values})
 
         return dumps({
             "status": "SUCCESS",
