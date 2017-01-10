@@ -57,6 +57,8 @@ class HelloWorld(object):
     def index(self):
         return 'Hello World!'
 
+cherrypy.tools.CORS.on = True
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
 cherrypy.quickstart(HelloWorld())
 #print(counts('Electroretinography;Neoplasm Metastasis'))
