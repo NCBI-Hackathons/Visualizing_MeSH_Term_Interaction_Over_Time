@@ -72,7 +72,7 @@ class HelloWorld(object):
         return static.serve_file(os.path.join(path, 'index.html'))
 
 cherrypy.server.socket_host = '0.0.0.0'
-cherrypy.config.update({'server.socket_port': 80})
+cherrypy.config.update({'server.socket_port': 1234})
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
 cherrypy.quickstart(HelloWorld())
