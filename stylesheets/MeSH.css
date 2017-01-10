@@ -1,0 +1,12 @@
+text {
+    font: 12px sans-serif;
+}
+svg {
+    display: block;
+}
+html, body, #chart, svg {
+    margin: 10px;
+    padding: 10px;
+    height: 90%;
+    width: 90%
+}
