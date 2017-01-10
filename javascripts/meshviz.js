@@ -52,7 +52,7 @@ $('#viz-button').click(function(sender, e){
         alert(JSON.stringify(data));
     });
     
-    var cloud_url = "/wcloud?start=1985&end=1995qterms="+query;
+    var cloud_url = "/wcloud?start=1985&end=1995&qterms="+query;
     
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
