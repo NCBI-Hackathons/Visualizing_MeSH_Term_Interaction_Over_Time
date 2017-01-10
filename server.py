@@ -13,8 +13,7 @@ def counts(term_str):
 
     results = []
     for term in terms:
-        qterms = [s.strip() for s in term_str.split(',')] if ',' in term else qterms = [term]
-
+        qterms = [s.strip() for s in term_str.split(',')] if ',' in term else [term]
         res = db.article.aggregate(
            [
             {
@@ -49,7 +48,6 @@ class HelloWorld(object):
     @cherrypy.expose()
     def index(self):
         return 'Hello World!'
-
 
 cherrypy.quickstart(HelloWorld())
 #print(counts('Electroretinography,Neoplasm Metastasis'))
