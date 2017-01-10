@@ -6,7 +6,9 @@ from cherrypy.lib import static
 path = os.path.abspath(os.path.dirname(__file__))
 db = MongoClient()['pubmed']
 
-auto_complete_list = ['One', 'Orange', 'Two', 'Tree', 'Three']
+f = open('terms.txt')
+auto_complete_list = f.readlines()
+f.close()
 
 def counts(term_str):
     start_year = 1965; end_year = 2015
