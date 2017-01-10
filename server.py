@@ -2,6 +2,8 @@ import string, cherrypy
 from pymongo import MongoClient
 from bson.son import SON
 from collections import OrderedDict
+from json import dumps
+
 db = MongoClient()['pubmed']
 
 def counts(term_str):
@@ -18,8 +20,8 @@ def counts(term_str):
             }
         },
         {
-          '$group' : {
-             '_id' : "$year",
+          '$group': {
+             '_id': "$year",
              "count": {"$sum": 1}
           }
         },
@@ -35,16 +37,14 @@ def counts(term_str):
         else:
             wres[i] = 0
     out = [{'x':k, 'y':wres[k]} for k in wres].__repr__()
-    return {
-    "status": "SUCCESS",
-    "data": [
-        {
+    return dumps({
+        "status": "SUCCESS",
+        "data": [{
             "key": terms,
             "values": out
-        },
-    ]
-    }.__repr__()
-
+            },
+        ]
+    })
 class HelloWorld(object):
 
     @cherrypy.expose()
@@ -57,4 +57,3 @@ class HelloWorld(object):
 
 
 cherrypy.quickstart(HelloWorld())
-
