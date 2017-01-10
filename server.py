@@ -48,7 +48,7 @@ def word_cloud(start, end, terms):
             {'$project': {'_id': 0, 'mesh': 1}},
             {'$unwind': '$mesh'},
             {'$group': {'_id': "$mesh", 'count': {'$sum': 1}}},
-            {'$sort': {'count': 1}},
+            {'$sort': {'count': -1}},
     ])
     results = [r for r in res][:25]
     return dumps(results)
