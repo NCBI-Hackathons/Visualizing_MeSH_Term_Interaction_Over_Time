@@ -36,7 +36,7 @@ def counts(term_str):
             wres[i] = d[i]
         else:
             wres[i] = 0
-    out = [{'x':k, 'y':wres[k]} for k in wres].__repr__()
+    out = dumps([{'x':k, 'y':wres[k]} for k in wres])
     return dumps({
         "status": "SUCCESS",
         "data": [{
