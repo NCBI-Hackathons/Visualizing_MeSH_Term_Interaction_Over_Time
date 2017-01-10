@@ -65,7 +65,7 @@ class HelloWorld(object):
 
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
-        terms = qterms.split('|')
+        terms = [s.strip() for s in qterms.split('|')]
         return word_cloud(start, end, terms)
 
     @cherrypy.expose
@@ -76,6 +76,9 @@ cherrypy.server.socket_host = '0.0.0.0'
 cherrypy.config.update({'server.socket_port': 1234})
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
-cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
-cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
+#cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
+
+#cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
 #print(counts('Electroretinography;Neoplasm Metastasis'))
+
+print(word_cloud(1965, 2010, ['Ebolavirus']))
