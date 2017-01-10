@@ -44,13 +44,13 @@ def counts(term_str):
 
 def word_cloud(start, end, terms):
     res = db.article.aggregate([
-            {'$match': {'year': {'$gt': start, '$lt': end}, 'mesh': {'$in': terms}}},
+            {'$match': {'year': {'$gt': start, '$lt': end}, 'mesh': {'$all': terms}}},
             {'$project': {'_id': 0, 'mesh': 1}},
             {'$unwind': '$mesh'},
             {'$group': {'_id': "$mesh", 'count': {'$sum': 1}}},
-            {'$sort': {'_id': 1}},
+            {'$sort': {'count': 1}},
     ])
-    results = [r for r in res]
+    results = [r for r in res][:25]
     return dumps(results)
 
 class HelloWorld(object):
@@ -66,7 +66,6 @@ class HelloWorld(object):
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
         terms = [s.strip() for s in qterms.split('|')]
-        print(terms)
         return word_cloud(int(start), int(end), terms)
 
     @cherrypy.expose
