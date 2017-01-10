@@ -4,9 +4,13 @@ text {
 svg {
     display: block;
 }
-html, body, #chart, svg {
-    margin: 10px;
-    padding: 10px;
-    height: 90%;
-    width: 90%
+html, body{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%
+}
+#chart, svg {
+    height: 80%;
+    width: 100%
 }
