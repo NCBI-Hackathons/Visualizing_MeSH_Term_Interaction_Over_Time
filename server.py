@@ -8,18 +8,18 @@ def counts(term_str):
     a = 1965
     b = 2015
 
-    terms = [s.strip() for s in term_str.split(',')]
+    terms = [s.strip() for s in term_str.split(';')]
     terms.extend([term_str])
 
     results = []
     for term in terms:
-        qterms = [s.strip() for s in term_str.split(',')] if ',' in term else [term]
+        qterms = [s.strip() for s in term_str.split(';')] if ';' in term else [term]
         res = db.article.aggregate(
            [
             {
               '$match': {
                 'year': {'$gt': a - 1, '$lt': b + 1 },
-                'mesh': {'$in': qterms}
+                'mesh': {'$all': qterms}
                 }
             },
             {
@@ -32,7 +32,11 @@ def counts(term_str):
            ]
         )
         values = [{'x': r['_id'], 'y': r['count']} for r in res]
-        results.append({'key': 'co-occurrence', 'values': values}) if ',' in term else results.append({'key': term, 'values': values})
+        found_years = [r['_id'] for r in res]
+        for year in range(a, b):
+            if not year in found_years:
+                values.append({'x': year, 'y': 0})
+        results.append({'key': 'co-occurrence', 'values': values}) if ';' in term else results.append({'key': term, 'values': values})
 
     return dumps({
         "status": "SUCCESS",
@@ -50,4 +54,4 @@ class HelloWorld(object):
         return 'Hello World!'
 
 cherrypy.quickstart(HelloWorld())
-#print(counts('Electroretinography,Neoplasm Metastasis'))
+#print(counts('Electroretinography;Neoplasm Metastasis'))
