@@ -30,6 +30,7 @@ $('#viz-button').click(function(sender, e){
     
     $('#viz-button').text('loading ..');
     query = query.replace(",", "|");
+    query = query.replace("_", ",");
     
     var freq_url = "/freqs?terms="+query;
 
