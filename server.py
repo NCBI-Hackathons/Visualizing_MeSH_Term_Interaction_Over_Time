@@ -68,7 +68,7 @@ class HelloWorld(object):
     @cherrypy.expose()
     def auto_complete(self, term):
         term = term[term.rfind(',') + 1:].strip()
-        return dumps([s.replace(',', '_') for s in auto_complete_list if s.startswith(term)][:10])
+        return dumps([s.replace(',', '_') for s in auto_complete_list if s.lower().startswith(term.lower())][:10])
 
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
