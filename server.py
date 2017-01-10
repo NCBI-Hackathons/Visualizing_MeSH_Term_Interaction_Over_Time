@@ -76,7 +76,6 @@ cherrypy.server.socket_host = '0.0.0.0'
 cherrypy.config.update({'server.socket_port': 1234})
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
-css_handler = cherrypy.tools.staticdir.handler(section="/", dir='/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time')
-cherrypy.tree.mount(css_handler, '')
+cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
 cherrypy.quickstart(HelloWorld())
 #print(counts('Electroretinography;Neoplasm Metastasis'))
