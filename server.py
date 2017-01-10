@@ -42,6 +42,17 @@ def counts(term_str):
             "status": "FAILURE",
         })
 
+def word_cloud(start, end, terms):
+    res = db.article.aggregate([
+            {'$match': {'year': {'$gt': start, '$lt': end}, 'mesh': {'$in': terms}}},
+            {'$project': {'_id': 0, 'mesh': 1}},
+            {'$unwind': '$mesh'},
+            {'$group': {'_id': "$mesh", 'count': {'$sum': 1}}},
+            {'$sort': {'_id': 1}},
+    ])
+    results = [r for r in res]
+    return dumps(results)
+
 class HelloWorld(object):
 
     @cherrypy.expose()
@@ -52,10 +63,15 @@ class HelloWorld(object):
     def auto_complete(self, starter):
         return dumps([s for s in auto_complete_list if s.startswith(starter)][:3])
 
+    def wcloud(self, start, end, qterms):
+        terms = qterms.split('|')
+        return word_cloud(start, end, terms)
+
     @cherrypy.expose
     def index(self):
         return static.serve_file(os.path.join(path, 'index.html'))
 
+cherrypy.config.update({'server.socket_port': 80})
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
 cherrypy.quickstart(HelloWorld())
