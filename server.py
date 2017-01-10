@@ -1,12 +1,14 @@
-import cherrypy
+import string, cherrypy
 from pymongo import MongoClient
 from bson.son import SON
 from collections import OrderedDict
 db = MongoClient()['pubmed']
 
-def counts(terms):
+def counts(term_str):
     a = 1965
     b = 2015
+    print(term_str)
+    terms = [s.strip() for s in term_str.split(',')]
     res = db.article.aggregate(
        [
         {
@@ -32,17 +34,27 @@ def counts(terms):
             wres[i] = d[i]
         else:
             wres[i] = 0
-    return [{'x':k, 'y':wres[k]} for k in wres].__repr__()
+    out = [{'x':k, 'y':wres[k]} for k in wres].__repr__()
+    return {
+    "status": "SUCCESS",
+    "data": [
+        {
+            "key": terms,
+            "values": out
+        },
+    ]
+    }.__repr__()
 
 class HelloWorld(object):
 
     @cherrypy.expose()
-    def index(self):
-        return "Hello World!"
+    def freqs(self, terms):
+        return counts(terms)
 
     @cherrypy.expose()
-    def freqs(self, terms):
-        return counts([terms,])
+    def index(self):
+        return 'Hello World!'
+
 
 cherrypy.quickstart(HelloWorld())
 
