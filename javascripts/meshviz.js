@@ -32,7 +32,7 @@ $('#viz-button').click(function(sender, e){
     query = query.replace(",", "|");
     
     alert('hello');
-    var url = "http://localhost:8080/freqs?terms="+query;
+    var url = "/freqs?terms="+query;
 
     var jqxhr = $.get(url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data)["data"];

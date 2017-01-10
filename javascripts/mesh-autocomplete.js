@@ -24,6 +24,6 @@ $( function() {
       "Scheme"
     ];
     $( "#mesh-terms" ).autocomplete({
-      source: "http://localhost:8080/auto_complete"
+      source: "/auto_complete"
     });
   } );
