@@ -57,6 +57,6 @@ class HelloWorld(object):
     def index(self):
         return 'Hello World!'
 
-cherrypy.response.headers["Access-Control-Allow-Origin"] = "http://localhost"
+cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.quickstart(HelloWorld())
 #print(counts('Electroretinography;Neoplasm Metastasis'))
