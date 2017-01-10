@@ -66,7 +66,8 @@ class HelloWorld(object):
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
         terms = [s.strip() for s in qterms.split('|')]
-        return word_cloud(start, end, terms)
+        print(terms)
+        return word_cloud(int(start), int(end), terms)
 
     @cherrypy.expose
     def index(self):
