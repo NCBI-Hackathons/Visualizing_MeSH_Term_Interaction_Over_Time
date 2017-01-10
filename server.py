@@ -50,7 +50,7 @@ class HelloWorld(object):
 
     @cherrypy.expose()
     def auto_complete(self, starter):
-        return dumps([s.startswith(starter) for s in auto_complete_list][:3])
+        return dumps([s for s in auto_complete_list if s.startswith(starter)][:3])
 
     @cherrypy.expose
     def index(self):
