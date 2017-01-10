@@ -19,11 +19,6 @@ nv.addGraph(function() {
         nv.utils.windowResize(chart.update);
         return chart;
     });
-$(document).ajaxError(function(e, jqxhr, settings, exception) {
-  if (jqxhr.readyState == 0 || jqxhr.status == 0) {
-    return; //Skip this error
-  }
-});
 
 $('#viz-button').click(function(sender, e){
     
@@ -36,7 +31,8 @@ $('#viz-button').click(function(sender, e){
     $('#viz-button').text('loading ..');
     query = query.replace(",", "|");
     
-    var url = "/freqs?terms="+query;
+    alert('hello');
+    var url = "http://localhost:8080/freqs?terms="+query;
 
     var jqxhr = $.get(url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data)["data"];
