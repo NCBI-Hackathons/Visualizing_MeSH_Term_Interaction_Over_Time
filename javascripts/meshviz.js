@@ -55,8 +55,9 @@ $('#viz-button').click(function(sender, e){
     var cloud_url = "/wcloud?start=1985&end=1995&qterms="+query;
     
     
+    
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
-        my_data = JSON.parse(data)["data"];
+        my_data = JSON.parse(data);
         
         /*var words = [
             {text: "Abdo", weight: 13, link: "#"},
