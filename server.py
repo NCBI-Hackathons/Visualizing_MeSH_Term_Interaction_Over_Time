@@ -63,6 +63,7 @@ class HelloWorld(object):
     def auto_complete(self, starter):
         return dumps([s for s in auto_complete_list if s.startswith(starter)][:3])
 
+    @cherrypy.expose()
     def wcloud(self, start, end, qterms):
         terms = qterms.split('|')
         return word_cloud(start, end, terms)
