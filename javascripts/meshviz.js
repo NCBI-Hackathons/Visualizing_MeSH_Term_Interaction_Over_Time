@@ -3,7 +3,7 @@ function setWordCloud(start, end, terms){
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data);
-
+        alert(my_data);
         $(function() {
             $("#cloud").jQCloud(my_data);
         });
@@ -18,7 +18,7 @@ function updateWordCloud(start, end, terms){
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data);
-
+        alert(my_data);
         $(function() {
             $("#cloud").jQCloud('update', my_data);
         });
@@ -83,7 +83,7 @@ $('#viz-button').click(function(sender, e){
         my_data = JSON.parse(data)["data"];
         nv.addGraph(function() {
             var chart = nv.models.lineWithFocusChart();
-            chart.brushExtent([1985,1995]);
+            chart.brushExtent([1980,2000]);
             chart.yTickFormat(d3.format(',')); 
             chart.useInteractiveGuideline(true);
             d3.select('#chart svg')
