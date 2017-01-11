@@ -21,7 +21,7 @@ function updateWordCloud(start, end, terms){
         
         $(function() {
             //$('#cloud').jQCloud('destroy');
-            $("#cloud").jQCloud(my_data);
+            $("#cloud").jQCloud('update', my_data);
         });
         
     }).fail(function(data, error){
