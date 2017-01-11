@@ -20,7 +20,7 @@ function updateWordCloud(start, end, terms){
         my_data = JSON.parse(data);
         
         $(function() {
-            $('#cloud').jQCloud('destroy');
+            //$('#cloud').jQCloud('destroy');
             $("#cloud").jQCloud(my_data);
         });
         
