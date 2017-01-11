@@ -3,7 +3,7 @@ function setWordCloud(start, end, terms){
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data);
-        alert(my_data);
+
         $(function() {
             $("#cloud").jQCloud(my_data);
         });
@@ -16,9 +16,11 @@ function setWordCloud(start, end, terms){
 function updateWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
     
+    alert(cloud_url);
+    
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data);
-        alert(my_data);
+        alert(JSON.stringify(my_data));
         $(function() {
             $("#cloud").jQCloud('update', my_data);
         });
@@ -51,15 +53,18 @@ nv.addGraph(function() {
     
     // update word cloud when the brush is moved
     d3.select('#chart svg').on('click', function(){
+        alert('Here 1');
         var range = JSON.stringify(chart.brushExtent());
         range = range.substr(1, range.length-2)
         var start = range.split(',')[0].split('.')[0];
         var end = range.split(',')[1].split('.')[0];
         
+        alert('Here 2');
         var query = $('#mesh-terms').val();
         query = query.replace(",", "|");
         query = query.replace("_", ",");
         
+        alert('Here 3');
         updateWordCloud(start, end, query);
     });
     return chart;
