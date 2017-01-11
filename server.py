@@ -81,7 +81,7 @@ def word_cloud(start, end, terms):
         r['text'] = r['_id']
         del r['_id']
         r['link'] = "#"
-        if not r['text'] in mesh_stopwords and not r['text'] in terms:
+        if not r['text'] in mesh_stopwords:
             results.append(r)
     results = results[:25]
     return dumps(results)
