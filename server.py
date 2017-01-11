@@ -6,11 +6,21 @@ from cherrypy.lib import static
 path = os.path.abspath(os.path.dirname(__file__))
 db = MongoClient()['pubmed']
 
-f = open('terms.txt')
-auto_complete_list = f.readlines()
-f.close()
+def wordlist(fn):
+    f = open('terms.txt')
+    lines = f.readlines()
+    f.close()
+    return [line.strip() for line in lines]
+
+auto_complete_list = wordlist('terms.txt')
+mesh_stopwords = wordlist('mesh_stopwords.txt')
 
 def counts(term_str):
+    '''
+    The main end-point for the line chart
+    :param term_str: a pipe-separated list of mesh terms.
+    :return: the frequencies of the terms by year, formatted for the JS widget
+    '''
     start_year = 1965; end_year = 2015
     try:
         terms = [s.strip() for s in term_str.split('|')]
@@ -43,6 +53,13 @@ def counts(term_str):
         })
 
 def word_cloud(start, end, terms):
+    '''
+    The endpoint for the word cloud
+    :param start: start year
+    :param end: end year
+    :param terms: search mesh terms
+    :return: other co-occurring terms with frequencies
+    '''
     res = db.article.aggregate([
             {'$match': {'year': {'$gt': start, '$lt': end}, 'mesh': {'$all': terms}}},
             {'$project': {'_id': 0, 'mesh': 1}},
@@ -80,7 +97,7 @@ class HelloWorld(object):
         return static.serve_file(os.path.join(path, 'index.html'))
 
 cherrypy.server.socket_host = '0.0.0.0'
-cherrypy.config.update({'server.socket_port': 1234})
+cherrypy.config.update({'server.socket_port': 8080})
 cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
 cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
 cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
