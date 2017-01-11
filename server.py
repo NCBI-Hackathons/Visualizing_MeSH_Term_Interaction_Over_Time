@@ -122,5 +122,5 @@ def local():
     #print(word_cloud(1965, 2010, ['Ebolavirus']))
     print(counts('Diabetes Mellitus'))
 
-#server()
-local()
+server()
+#local()
