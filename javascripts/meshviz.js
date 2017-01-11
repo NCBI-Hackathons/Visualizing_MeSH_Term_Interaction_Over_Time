@@ -1,4 +1,4 @@
-function updateWordCloud(start, end, terms){
+function setWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
@@ -11,13 +11,28 @@ function updateWordCloud(start, end, terms){
     }).fail(function(data, error){
         alert(JSON.stringify(data));
     });
+}
+
+function updateWordCloud(start, end, terms){
+    var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
+    
+    var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
+        my_data = JSON.parse(data);
+
+        $(function() {
+            $("#cloud").jQCloud('update', my_data);
+        });
+        
+    }).fail(function(data, error){
+        alert(JSON.stringify(data));
+    });
     
 }
 
 nv.addGraph(function() {
     var chart = nv.models.lineWithFocusChart();
 
-    chart.brushExtent([1985,1995]);
+    chart.brushExtent([1980,2000]);
 
     //chart.xAxis.tickFormat(d3.format(',f')).axisLabel("Stream - 3,128,.1");
     //chart.x2Axis.tickFormat(d3.format(',f'));
@@ -83,5 +98,5 @@ $('#viz-button').click(function(sender, e){
         alert(JSON.stringify(data));
     });
     
-    updateWordCloud('1985', '1995', query);  
+    setWordCloud('1980', '2000', query);  
 });
