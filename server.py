@@ -1,3 +1,9 @@
+'''
+The Server
+
+Author: Ravi Teja Bhupatiraju
+License: GPL
+'''
 import os, cherrypy
 from pymongo import MongoClient
 from json import dumps
@@ -7,6 +13,7 @@ path = os.path.abspath(os.path.dirname(__file__))
 db = MongoClient()['pubmed']
 
 def wordlist(fn):
+    'utility function to get a word list from a text feeder (one word per line)'
     f = open('terms.txt')
     lines = f.readlines()
     f.close()
@@ -80,28 +87,38 @@ class HelloWorld(object):
 
     @cherrypy.expose()
     def freqs(self, terms):
+        'Line graph endpoint'
         return counts(terms)
 
     @cherrypy.expose()
     def auto_complete(self, term):
+        'Search box auto-complete endpoint'
         term = term[term.rfind(',') + 1:].strip()
         return dumps([s.replace(',', '_') for s in auto_complete_list if s.lower().startswith(term.lower())][:10])
 
     @cherrypy.expose()
     def wcloud(self, start, end, qterms):
+        'Word cloud endpoint'
         terms = [s.strip() for s in qterms.split('|')]
         return word_cloud(int(start), int(end), terms)
 
     @cherrypy.expose
     def index(self):
+        'Home page'
         return static.serve_file(os.path.join(path, 'index.html'))
 
-cherrypy.server.socket_host = '0.0.0.0'
-cherrypy.config.update({'server.socket_port': 8080})
-cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
-cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
-cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
+def server():
+    'Server initialization'
+    cherrypy.server.socket_host = '0.0.0.0'
+    cherrypy.config.update({'server.socket_port': 8080})
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
+    cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
+    cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
 
-cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
-#print(counts('Electroretinography;Neoplasm Metastasis'))
-#print(word_cloud(1965, 2010, ['Ebolavirus']))
+def local():
+    print(counts('Electroretinography;Neoplasm Metastasis'))
+    print(word_cloud(1965, 2010, ['Ebolavirus']))
+
+server()
+#local()
