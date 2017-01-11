@@ -5,6 +5,12 @@ Running on 16 cores will require around 40GB of RAM
 
 Author: Ravi Teja Bhupatiraju
 License: GPL
+
+After running the script, create indexes manually
+
+pubmed.article.createIndex( { "year": 1 } )
+pubmed.article.createIndex( { "mesh": 1 } )
+
 '''
 
 import sys, pymongo as mdb, multiprocessing as mp
@@ -78,9 +84,7 @@ def process_xml(fn):
 files = [fn_templ % str(i).zfill(3) for i in range(1, 892 + 1)]
 if __name__ == '__main__':
     mp.Pool(16).map(process_xml, files)
+    # db.article.createIndex({"year": 1}) # untested
+    # db.article.createIndex({"mesh": 1}) # untested
 
-'''
-for file in files:
-    print(file)
-    process_xml(file)
-'''
+
