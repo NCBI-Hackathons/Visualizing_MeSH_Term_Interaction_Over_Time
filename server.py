@@ -15,7 +15,7 @@ db = MongoClient()['pubmed']
 
 def wordlist(fn):
     'utility function to get a word list from a text feeder (one word per line)'
-    f = open('terms.txt')
+    f = open(fn)
     lines = f.readlines()
     f.close()
     return [line.strip() for line in lines]
@@ -84,6 +84,9 @@ def word_cloud(start, end, terms):
         r['link'] = "#"
         if r['text'] in terms:
             extend.append(r)
+            continue
+        if not r['text'] in mesh_stopwords:
+            results.append(r)
     results = results[:25]
     results.extend(extend)
     return dumps(results)
