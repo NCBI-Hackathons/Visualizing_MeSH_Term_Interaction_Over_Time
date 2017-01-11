@@ -121,7 +121,6 @@ def server(port):
     cherrypy.config.update({'server.socket_port': int(port)})
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
-    cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
     cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
 
 def local():
