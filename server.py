@@ -31,7 +31,8 @@ def counts(term_str):
     start_year = 1965; end_year = 2015
     try:
         terms = [s.strip() for s in term_str.split('|')]
-        terms.extend([term_str])
+        if len(terms) > 0:
+            terms.extend([term_str])
 
         results = []
         for term in terms:
@@ -117,8 +118,9 @@ def server():
     cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
 
 def local():
-    print(counts('Electroretinography;Neoplasm Metastasis'))
-    print(word_cloud(1965, 2010, ['Ebolavirus']))
+    #print(counts('Electroretinography;Neoplasm Metastasis'))
+    #print(word_cloud(1965, 2010, ['Ebolavirus']))
+    print(counts('Diabetes Mellitus'))
 
-server()
-#local()
+#server()
+local()
