@@ -18,9 +18,8 @@ $( function() {
         }
       })
       .autocomplete({
-        minLength: 1,
-        source: "/auto_complete"
-        },
+        minLength: 0,
+        source: "/auto_complete",
         focus: function() {
           // prevent value inserted on focus
           return false;
