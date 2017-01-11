@@ -18,9 +18,10 @@ function updateWordCloud(start, end, terms){
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data);
-        alert(JSON.stringify(my_data));
+        
         $(function() {
-            $("#cloud").jQCloud('update', my_data);
+            $('#cloud').jQCloud('destroy');
+            $("#cloud").jQCloud(my_data);
         });
         
     }).fail(function(data, error){
