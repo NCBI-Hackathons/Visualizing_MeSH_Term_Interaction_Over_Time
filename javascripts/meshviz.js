@@ -16,8 +16,6 @@ function setWordCloud(start, end, terms){
 function updateWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
     
-    alert(cloud_url);
-    
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
         my_data = JSON.parse(data);
         alert(JSON.stringify(my_data));
@@ -51,22 +49,6 @@ nv.addGraph(function() {
 
     nv.utils.windowResize(chart.update);
     
-    // update word cloud when the brush is moved
-    d3.select('#chart svg').on('click', function(){
-        alert('Here 1');
-        var range = JSON.stringify(chart.brushExtent());
-        range = range.substr(1, range.length-2)
-        var start = range.split(',')[0].split('.')[0];
-        var end = range.split(',')[1].split('.')[0];
-        
-        alert('Here 2');
-        var query = $('#mesh-terms').val();
-        query = query.replace(",", "|");
-        query = query.replace("_", ",");
-        
-        alert('Here 3');
-        updateWordCloud(start, end, query);
-    });
     return chart;
 });
 
@@ -96,6 +78,21 @@ $('#viz-button').click(function(sender, e){
                 .call(chart);
 
             nv.utils.windowResize(chart.update);
+            
+            // update word cloud when the brush is moved
+            d3.select('#chart svg').on('click', function(){
+                
+                var range = JSON.stringify(chart.brushExtent());
+                range = range.substr(1, range.length-2)
+                var start = range.split(',')[0].split('.')[0];
+                var end = range.split(',')[1].split('.')[0];
+        
+                var query = $('#mesh-terms').val();
+                query = query.replace(",", "|");
+                query = query.replace("_", ",");
+        
+                updateWordCloud(start, end, query);
+            });
             return chart;
         });
         $('#viz-button').text('Visualize');
