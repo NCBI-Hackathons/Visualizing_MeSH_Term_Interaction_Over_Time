@@ -4,7 +4,7 @@ The Server
 Author: Ravi Teja Bhupatiraju
 License: GPL
 '''
-import os, cherrypy
+import os, sys, cherrypy, click
 from pymongo import MongoClient
 from json import dumps
 from cherrypy.lib import static
@@ -115,10 +115,10 @@ class HelloWorld(object):
         'Home page'
         return static.serve_file(os.path.join(path, 'index.html'))
 
-def server():
+def server(port):
     'Server initialization'
     cherrypy.server.socket_host = '0.0.0.0'
-    cherrypy.config.update({'server.socket_port': 8080})
+    cherrypy.config.update({'server.socket_port': port})
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
     cherrypy.config.update('/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time/config.txt')
@@ -129,5 +129,23 @@ def local():
     pprint(word_cloud(1965, 2010, ['Ebolavirus']))
     #pprint(counts('Diabetes Mellitus'))
 
-server()
-#local()
+@click.group()
+def cmdopt():
+    pass
+
+@cmdopt.command()
+@click.option('--port', default='8080')
+def server(**args):
+    port = args['port']
+    if port.isdigit():
+        server(int(port))
+    else:
+        print('Please enter a valid port number')
+        sys.exit(1)
+
+@cmdopt.command()
+def local(**kwargs):
+    local()
+
+if __name__ == '__main__':
+    cmdopt()
