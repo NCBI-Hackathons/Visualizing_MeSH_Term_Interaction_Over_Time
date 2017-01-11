@@ -1,6 +1,6 @@
 $( function() {
     $( "#mesh-terms" ).autocomplete({
         source: "/auto_complete",
-        appendTo: $("#mesh-terms").next()
+        appendTo: $("#mesh-terms")
     });
 });

@@ -61,11 +61,8 @@ $('#viz-button').click(function(sender, e){
     }
     
     $('#viz-button').text('loading ..');
-    //query = query.replace(",", "|");
     query = query.split(',').join('|');
-    //query = query.replace("_", ",");
     query = query.split('_').join(',');
-    alert(query);
     
     var freq_url = "/freqs?terms="+query;
 
@@ -91,8 +88,8 @@ $('#viz-button').click(function(sender, e){
                 var end = range.split(',')[1].split('.')[0];
         
                 var query = $('#mesh-terms').val();
-                query = query.replace(",", "|");
-                query = query.replace("_", ",");
+                query = query.split(',').join('|');
+                query = query.split('_').join(',');
         
                 updateWordCloud(start, end, query);
             });
