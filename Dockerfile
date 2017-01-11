@@ -24,4 +24,4 @@ ADD terms.txt /terms.txt
 ADD index.html /index.html
 
 EXPOSE 8080
-ENTRYPOINT ["/usr/bin/python", "/server.js"]
+ENTRYPOINT ["/usr/bin/python", "/server.py"]
