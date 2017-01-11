@@ -1,6 +1,6 @@
 # MeSHgram
 # Packages the web server and front-end UI
-# Connects to the MongoDB docker images
+# Connects to the MongoDB docker image
 
 FROM ubuntu:16.04
 MAINTAINER Abdelrahman Hosny <abdelrahman.hosny@hotmail.com>
@@ -11,17 +11,17 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD ./images /root/images
-ADD ./javascripts /root/javascripts
-ADD ./stylesheets /root/stylesheets
-ADD server.py /root/server.py
-ADD pm2mdb.py /root/pm2mbd.py
-ADD url_gen.py /root/url_gen.py
-ADD wordcloud.py /root/wordcloud.py
-ADD config.txt /root/config.txt
-ADD mesh_stopwords.txt /root/mesh_stopwords.txt
-ADD terms.txt /root/terms.txt
-ADD index.html /root/index.html
+ADD ./images /hackathon/MeSHgram/images
+ADD ./javascripts /hackathon/MeSHgram/javascripts
+ADD ./stylesheets /hackathon/MeSHgram/stylesheets
+ADD server.py /hackathon/MeSHgram/server.py
+ADD pm2mdb.py /hackathon/MeSHgram/pm2mbd.py
+ADD url_gen.py /hackathon/MeSHgram/url_gen.py
+ADD wordcloud.py /hackathon/MeSHgram/wordcloud.py
+ADD config.txt /hackathon/MeSHgram/config.txt
+ADD mesh_stopwords.txt /hackathon/MeSHgram/mesh_stopwords.txt
+ADD terms.txt /hackathon/MeSHgram/terms.txt
+ADD index.html /hackathon/MeSHgram/index.html
 
 EXPOSE 8080
-ENTRYPOINT ["/usr/bin/python", "/server.py"]
+ENTRYPOINT ["/usr/bin/python", "/hackathon/MeSHgram/server.py"]
