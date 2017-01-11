@@ -65,6 +65,7 @@ $('#viz-button').click(function(sender, e){
     query = query.split(',').join('|');
     //query = query.replace("_", ",");
     query = query.split('_').join(',');
+    alert(query);
     
     var freq_url = "/freqs?terms="+query;
 
