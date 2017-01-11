@@ -70,6 +70,7 @@ $('#viz-button').click(function(sender, e){
     query = query.split(',').join('|');
     query = query.split('_').join(',');
     
+    //alert(query);
     var freq_url = "/freqs?terms="+query;
 
     var jqxhr = $.get(freq_url , function(data,textStatus,jqXHR) {
