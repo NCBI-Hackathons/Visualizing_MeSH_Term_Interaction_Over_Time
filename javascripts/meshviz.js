@@ -1,4 +1,4 @@
-function updateWordCloud(start, end, terms){
+function setWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
     
     var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
@@ -11,13 +11,28 @@ function updateWordCloud(start, end, terms){
     }).fail(function(data, error){
         alert(JSON.stringify(data));
     });
+}
+
+function updateWordCloud(start, end, terms){
+    var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
+    
+    var jqxhr = $.get(cloud_url , function(data,textStatus,jqXHR) {
+        my_data = JSON.parse(data);
+        
+        $(function() {
+            $("#cloud").jQCloud('update', my_data);
+        });
+        
+    }).fail(function(data, error){
+        alert(JSON.stringify(data));
+    });
     
 }
 
 nv.addGraph(function() {
     var chart = nv.models.lineWithFocusChart();
 
-    chart.brushExtent([1985,1995]);
+    chart.brushExtent([1980,2000]);
 
     //chart.xAxis.tickFormat(d3.format(',f')).axisLabel("Stream - 3,128,.1");
     //chart.x2Axis.tickFormat(d3.format(',f'));
@@ -34,19 +49,6 @@ nv.addGraph(function() {
 
     nv.utils.windowResize(chart.update);
     
-    // update word cloud when the brush is moved
-    d3.select('#chart svg').on('click', function(){
-        var range = JSON.stringify(chart.brushExtent());
-        range = range.substr(1, range.length-2)
-        var start = range.split(',')[0].split('.')[0];
-        var end = range.split(',')[1].split('.')[0];
-        
-        var query = $('#mesh-terms').val();
-        query = query.replace(",", "|");
-        query = query.replace("_", ",");
-        
-        updateWordCloud(start, end, query);
-    });
     return chart;
 });
 
@@ -59,8 +61,11 @@ $('#viz-button').click(function(sender, e){
     }
     
     $('#viz-button').text('loading ..');
-    query = query.replace(",", "|");
-    query = query.replace("_", ",");
+    //query = query.replace(",", "|");
+    query = query.split(',').join('|');
+    //query = query.replace("_", ",");
+    query = query.split('_').join(',');
+    alert(query);
     
     var freq_url = "/freqs?terms="+query;
 
@@ -68,7 +73,7 @@ $('#viz-button').click(function(sender, e){
         my_data = JSON.parse(data)["data"];
         nv.addGraph(function() {
             var chart = nv.models.lineWithFocusChart();
-            chart.brushExtent([1985,1995]);
+            chart.brushExtent([1980,2000]);
             chart.yTickFormat(d3.format(',')); 
             chart.useInteractiveGuideline(true);
             d3.select('#chart svg')
@@ -76,6 +81,21 @@ $('#viz-button').click(function(sender, e){
                 .call(chart);
 
             nv.utils.windowResize(chart.update);
+            
+            // update word cloud when the brush is moved
+            d3.select('#chart svg').on('click', function(){
+                
+                var range = JSON.stringify(chart.brushExtent());
+                range = range.substr(1, range.length-2)
+                var start = range.split(',')[0].split('.')[0];
+                var end = range.split(',')[1].split('.')[0];
+        
+                var query = $('#mesh-terms').val();
+                query = query.replace(",", "|");
+                query = query.replace("_", ",");
+        
+                updateWordCloud(start, end, query);
+            });
             return chart;
         });
         $('#viz-button').text('Visualize');
@@ -83,5 +103,5 @@ $('#viz-button').click(function(sender, e){
         alert(JSON.stringify(data));
     });
     
-    updateWordCloud('1985', '1995', query);  
+    setWordCloud('1980', '2000', query);  
 });
