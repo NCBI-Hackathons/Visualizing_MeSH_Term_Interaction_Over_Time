@@ -29,7 +29,7 @@ def counts(term_str):
     :param term_str: a pipe-separated list of mesh terms.
     :return: the frequencies of the terms by year, formatted for the JS widget
     '''
-    start_year = 1965; end_year = 2015
+    start_year = 1965; end_year = 2016
     try:
         terms = [s.strip() for s in term_str.split('|')]
         if len(terms) > 1:
