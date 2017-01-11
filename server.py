@@ -77,13 +77,17 @@ def word_cloud(start, end, terms):
             {'$sort': {'weight': -1}},
     ])
     results = []
+    extend = []
     for r in res:
         r['text'] = r['_id']
         del r['_id']
         r['link'] = "#"
-        if not r['text'] in mesh_stopwords:
+        if r['text'] in terms:
+            extend.append(r)
+        if r['text'] not in mesh_stopwords:
             results.append(r)
     results = results[:25]
+    results.extend(extend)
     return dumps(results)
 
 class HelloWorld(object):
@@ -121,8 +125,8 @@ def server():
 
 def local():
     #print(counts('Electroretinography;Neoplasm Metastasis'))
-    #print(word_cloud(1965, 2010, ['Ebolavirus']))
-    pprint(counts('Diabetes Mellitus'))
+    pprint(word_cloud(1965, 2010, ['Ebolavirus']))
+    #pprint(counts('Diabetes Mellitus'))
 
-server()
-#local()
+#server()
+local()
