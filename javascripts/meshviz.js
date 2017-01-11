@@ -55,9 +55,15 @@ nv.addGraph(function() {
 $('#viz-button').click(function(sender, e){
     
     var query = $('#mesh-terms').val();
+    query = $.trim(query);
+    
     if(query === ""){
         alert("Please, enter MeSH terms separated by semicolons!");
         return;
+    }
+    if(query.slice(-1) === ','){
+        new_query = query.substring(0, query.length-1);
+        query = new_query;
     }
     
     $('#viz-button').text('loading ..');
@@ -88,6 +94,13 @@ $('#viz-button').click(function(sender, e){
                 var end = range.split(',')[1].split('.')[0];
         
                 var query = $('#mesh-terms').val();
+                query = $.trim(query);
+                
+                if(query.slice(-1) === ','){
+                    new_query = query.substring(0, query.length-1);
+                    query = new_query;
+                }
+                
                 query = query.split(',').join('|');
                 query = query.split('_').join(',');
         
