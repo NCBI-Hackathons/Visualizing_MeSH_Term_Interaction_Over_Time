@@ -4,7 +4,7 @@ The Server
 Author: Ravi Teja Bhupatiraju
 License: GPL
 '''
-import os, sys, cherrypy, click
+import os, sys, cherrypy
 from pymongo import MongoClient
 from json import dumps
 from cherrypy.lib import static
@@ -129,23 +129,13 @@ def local():
     pprint(word_cloud(1965, 2010, ['Ebolavirus']))
     #pprint(counts('Diabetes Mellitus'))
 
-@click.group()
-def cmdopt():
-    pass
-
-@cmdopt.command()
-@click.option('--port', default='8080')
-def server(**args):
-    port = args['port']
-    if port.isdigit():
-        server(int(port))
-    else:
-        print('Please enter a valid port number')
-        sys.exit(1)
-
-@cmdopt.command()
-def local(**kwargs):
-    local()
-
 if __name__ == '__main__':
-    cmdopt()
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        if arg.isdigit():
+            server(arg)
+        else:
+            print('Please enter a valid port number')
+            sys.exit(1)
+    else:
+        server('8080')
