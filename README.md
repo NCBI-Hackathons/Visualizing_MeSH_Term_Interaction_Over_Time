@@ -1,4 +1,4 @@
-# MeSHup
+# MeSHgram
 <b>A tool to visually browse co-occurrence of MeSH terms in PubMeb.</b>
 
 Publications indexed in PubMed have human curated MeSH terms associated with them.
