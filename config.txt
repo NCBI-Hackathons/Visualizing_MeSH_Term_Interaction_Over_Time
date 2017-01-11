@@ -1,5 +1,5 @@
 [/]
-tools.staticdir.root = "~/hackathon/MeSHgram"
+tools.staticdir.root = "~/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time"
 
 [/images]
 tools.staticdir.on = True
