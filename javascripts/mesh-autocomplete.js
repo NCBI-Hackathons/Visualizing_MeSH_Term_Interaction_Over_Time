@@ -1,7 +1,11 @@
+/*
+This script implements the MeSH terms autcomplete functionality.
+It uses the jquery-ui.js library and calls a server endpoint in the source attribute to update the list.
+
+Author: Abdelrahman Hosny
+*/
+
 $( function() {
-    /*$( "#mesh-terms" ).autocomplete({
-        source: "/auto_complete"
-    });*/
     function split( val ) {
       return val.split( /,\s*/ );
     }

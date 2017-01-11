@@ -1,3 +1,13 @@
+/*
+This script implements the visualization widget along with the word cloud widget.
+The visualization uses the NVD3 library (which is based on D3.js library) and uses the line chart with focus.
+It visualizes the MeSH term (entered in the search query by the user) frequencies over years from 1965 to 2015.
+The word cloud widget updates itself with popular word close to the searched MeSH terms in the selected time period.
+
+Author: Abdelrahman Hosny
+*/
+
+// initializes the word cloud on the first time search
 function setWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
     
@@ -13,6 +23,7 @@ function setWordCloud(start, end, terms){
     });
 }
 
+// updates the search cloud on brush move event.
 function updateWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
     
@@ -29,6 +40,7 @@ function updateWordCloud(start, end, terms){
     
 }
 
+// draws the initial graph that contains no data
 nv.addGraph(function() {
     var chart = nv.models.lineWithFocusChart();
 
@@ -52,6 +64,7 @@ nv.addGraph(function() {
     return chart;
 });
 
+// fetch terms frequencies from the server and visualizes them.
 $('#viz-button').click(function(sender, e){
     
     var query = $('#mesh-terms').val();
@@ -70,7 +83,6 @@ $('#viz-button').click(function(sender, e){
     query = query.split(',').join('|');
     query = query.split('_').join(',');
     
-    // alert(query);
     var freq_url = "/freqs?terms="+query;
 
     var jqxhr = $.get(freq_url , function(data,textStatus,jqXHR) {
@@ -105,6 +117,7 @@ $('#viz-button').click(function(sender, e){
                 query = query.split(',').join('|');
                 query = query.split('_').join(',');
         
+                // call to word cloud function update
                 updateWordCloud(start, end, query);
             });
             return chart;
@@ -114,5 +127,6 @@ $('#viz-button').click(function(sender, e){
         alert(JSON.stringify(data));
     });
     
+    // call to word cloud function initiate
     setWordCloud('1980', '2000', query);  
 });
