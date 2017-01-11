@@ -11,17 +11,17 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD ./images /images
-ADD ./javascripts /javascripts
-ADD ./stylesheets /stylesheets
-ADD server.py /server.py
-ADD pm2mdb.py /pm2mbd.py
-ADD url_gen.py /url_gen.py
-ADD wordcloud.py /wordcloud.py
-ADD config.txt /config.txt
-ADD mesh_stopwords.txt /mesh_stopwords.txt
-ADD terms.txt /terms.txt
-ADD index.html /index.html
+ADD ./images /root/images
+ADD ./javascripts /root/javascripts
+ADD ./stylesheets /root/stylesheets
+ADD server.py /root/server.py
+ADD pm2mdb.py /root/pm2mbd.py
+ADD url_gen.py /root/url_gen.py
+ADD wordcloud.py /root/wordcloud.py
+ADD config.txt /root/config.txt
+ADD mesh_stopwords.txt /root/mesh_stopwords.txt
+ADD terms.txt /root/terms.txt
+ADD index.html /root/index.html
 
 EXPOSE 8080
 ENTRYPOINT ["/usr/bin/python", "/server.py"]
