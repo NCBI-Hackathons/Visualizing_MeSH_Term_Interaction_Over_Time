@@ -8,6 +8,7 @@ import os, cherrypy
 from pymongo import MongoClient
 from json import dumps
 from cherrypy.lib import static
+from pprint import pprint
 
 path = os.path.abspath(os.path.dirname(__file__))
 db = MongoClient()['pubmed']
@@ -31,7 +32,7 @@ def counts(term_str):
     start_year = 1965; end_year = 2015
     try:
         terms = [s.strip() for s in term_str.split('|')]
-        if len(terms) > 0:
+        if len(terms) > 1:
             terms.extend([term_str])
 
         results = []
@@ -120,7 +121,7 @@ def server():
 def local():
     #print(counts('Electroretinography;Neoplasm Metastasis'))
     #print(word_cloud(1965, 2010, ['Ebolavirus']))
-    print(counts('Diabetes Mellitus'))
+    pprint(counts('Diabetes Mellitus'))
 
 server()
 #local()
