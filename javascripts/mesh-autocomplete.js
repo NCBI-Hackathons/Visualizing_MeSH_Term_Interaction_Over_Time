@@ -1,29 +1,6 @@
 $( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
     $( "#mesh-terms" ).autocomplete({
-      source: "/auto_complete"
+        source: "/auto_complete",
+        appendTo: $("#mesh-terms").next()
     });
-  } );
+});
