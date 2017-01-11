@@ -84,8 +84,6 @@ def word_cloud(start, end, terms):
         r['link'] = "#"
         if r['text'] in terms:
             extend.append(r)
-        if r['text'] not in mesh_stopwords:
-            results.append(r)
     results = results[:25]
     results.extend(extend)
     return dumps(results)
@@ -128,5 +126,5 @@ def local():
     pprint(word_cloud(1965, 2010, ['Ebolavirus']))
     #pprint(counts('Diabetes Mellitus'))
 
-#server()
-local()
+server()
+#local()
