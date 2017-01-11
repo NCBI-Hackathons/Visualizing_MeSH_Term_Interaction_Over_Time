@@ -17,84 +17,48 @@ Treatment Outcome
 Aged, 80 and over
 Infant
 Risk Factors
-Molecular Sequence Data
 Retrospective Studies
 Follow-Up Studies
 Infant, Newborn
 Young Adult
 Cells, Cultured
-Kinetics
-Amino Acid Sequence
 Prospective Studies
-Brain
 Base Sequence
 Prognosis
 Diagnosis, Differential
 Age Factors
-Liver
 In Vitro Techniques
-Cell Line
-Dose-Response Relationship, Drug
-Neoplasms
-Mutation
 Surveys and Questionnaires
 RNA, Messenger
 Rabbits
-Tomography, X-Ray Computed
-Reproducibility of Results
-Magnetic Resonance Imaging
-Signal Transduction
 Cattle
-Postoperative Complications
 Radiography
 Dogs
 Sensitivity and Specificity
 Models, Biological
-Anti-Bacterial Agents
 Rats, Sprague-Dawley
 Immunohistochemistry
 DNA
 Hydrogen-Ion Concentration
 Disease Models, Animal
-Blood Pressure
-Calcium
-Kidney
-Escherichia coli
-Breast Neoplasms
-Chronic Disease
-Protein Binding
-Neurons
 Methods
 Sex Factors
-Polymerase Chain Reaction
 Mice, Inbred C57BL
 Prevalence
-Antineoplastic Agents
 Cross-Sectional Studies
 History, 20th Century
 Case-Control Studies
 Rats, Wistar
-Apoptosis
 Temperature
 Models, Molecular
 Rats, Inbred Strains
-Hypertension
-Binding Sites
 Microscopy, Electron
 Incidence
-Cell Line, Tumor
 Algorithms
 Risk Assessment
 Analysis of Variance
 United Kingdom
 Aging
-Gene Expression Regulation
-Recombinant Proteins
 Cohort Studies
-Lung
 Acute Disease
-Biomarkers
-Phenotype
-Severity of Illness Index
 Research
-Cell Differentiation
