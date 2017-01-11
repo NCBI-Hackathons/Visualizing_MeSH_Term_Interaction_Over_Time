@@ -61,8 +61,10 @@ $('#viz-button').click(function(sender, e){
     }
     
     $('#viz-button').text('loading ..');
-    query = query.replace(",", "|");
-    query = query.replace("_", ",");
+    //query = query.replace(",", "|");
+    query = query.split(',').join('|');
+    //query = query.replace("_", ",");
+    query = query.split('_').join(',');
     
     var freq_url = "/freqs?terms="+query;
 
