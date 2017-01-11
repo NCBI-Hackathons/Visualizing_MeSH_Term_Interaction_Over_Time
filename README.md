@@ -32,4 +32,6 @@ Server code was tested in Python 3.5 and Web client was tested in all major brow
 
 <b>nvd3</b> - D3 based javascript visualization library.
 
+<b>jqcloud</b> - Javascript plug-in for wordcloud
+
 
