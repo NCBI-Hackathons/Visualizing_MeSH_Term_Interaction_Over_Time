@@ -2,7 +2,7 @@
 The Server
 
 Author: Ravi Teja Bhupatiraju
-License: GPL
+License: MIT
 '''
 import os, sys, cherrypy
 from pymongo import MongoClient
