@@ -4,7 +4,7 @@ Pubmed to Mongodb loader.
 Running on 16 cores will require around 40GB of RAM
 
 Author: Ravi Teja Bhupatiraju
-License: GPL
+License: MIT
 
 After running the script, create indexes manually
 
