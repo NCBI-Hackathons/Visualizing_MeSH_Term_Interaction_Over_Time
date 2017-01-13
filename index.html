@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" 
-      type="image/png" 
-      href="images/meshLogo.jpg">
-    <title>MeSH Terms Interactions Over Time</title>
+      type="image/png"
+      href="images/logos/mg.png">
+    <title>MeSHgram - A tool to visually browse co-occurrence of MeSH terms in PubMeb</title>
+
+    <meta name="keywords" content="MeSH, pubmed, visualization, cooccurrence, graph, wordcloud, browse, explore">
     
     <link rel="stylesheet" href="stylesheets/nv.d3.css" type="text/css">
     <link rel="stylesheet" href="stylesheets/jqcloud.css" type="text/css">
@@ -29,7 +31,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">Visualizing PubMed MeSH</a> </div>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><a class="navbar-brand" href="#"><img src="images/logos/meshgram-white.png" alt="MeSHgram" width="160" height="40"> </a></div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <!--li><a href="#">About <span class="sr-only">(current)</span></a></li>
@@ -53,7 +55,8 @@
     <div id="cloud" style="width: 100%; height: 50%; border: 1px solid #ccc; text-align: center;"> </div>
     
     <div class="well well-sm" style="text-align: center">
-        Developed with <i class="fa fa-heart fa-lg"></i> by NCBI Hackathons Team, January 2017.
+        Developed with <i class="fa fa-heart fa-lg"></i> at #NCBIHackathon, January 2017.
+        Contact meshgram [dot] team [at] gmail.com for comments.
     </div>
     
     <script src="javascripts/meshviz.js"></script>

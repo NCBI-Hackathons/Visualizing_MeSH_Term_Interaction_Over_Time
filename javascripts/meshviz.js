@@ -89,7 +89,7 @@ $('#viz-button').click(function(sender, e){
         my_data = JSON.parse(data)["data"];
         nv.addGraph(function() {
             var chart = nv.models.lineWithFocusChart();
-            chart.brushExtent([1980,2000]);
+            chart.brushExtent([1940,2015]);
             chart.yTickFormat(d3.format(',')); 
             chart.useInteractiveGuideline(true);
             d3.select('#chart svg')
@@ -128,5 +128,5 @@ $('#viz-button').click(function(sender, e){
     });
     
     // call to word cloud function initiate
-    setWordCloud('1980', '2000', query);  
+    setWordCloud('1940', '2015', query);
 });
