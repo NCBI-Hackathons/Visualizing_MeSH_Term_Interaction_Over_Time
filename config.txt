@@ -1,5 +1,6 @@
 [/]
-tools.staticdir.root = "/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time"
+#tools.staticdir.root = "/home/ubuntu/hackathon/Visualizing_MeSH_Term_Interaction_Over_Time"
+tools.staticdir.root = "/home/mesh/work/Visualizing_MeSH_Term_Interaction_Over_Time"
 
 [/images]
 tools.staticdir.on = True
