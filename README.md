@@ -21,7 +21,7 @@ Server code was tested in Python 3.5 and Web client was tested in all major brow
 
 <b>mesh_stopwords.txt</b> - "Stop words" among MeSH terms. We calculated the 100 most frequent MeSH terms across the entire corpus and manually curated some terms out.
 
-## System Components
+## External Libraries / Packages
 <b>lxml</b> - C library for fast native XML parsing.
 
 <b>MongoDB</b> - Scalable NoSQL database.
@@ -34,4 +34,5 @@ Server code was tested in Python 3.5 and Web client was tested in all major brow
 
 <b>jqcloud</b> - Javascript plug-in for wordcloud
 
-
+## Data Source
+[FTP download from NLM bulk distribution for MEDLINE/PubMed](https://www.nlm.nih.gov/databases/download/data_distrib_main.html)
