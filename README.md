@@ -1,4 +1,4 @@
-# MeSHgram
+[
 <b>A tool to visually browse co-occurrence of MeSH terms in PubMeb.</b>
 
 Publications indexed in PubMed have human curated MeSH terms associated with them.
@@ -33,6 +33,9 @@ Server code was tested in Python 3.5 and Web client was tested in all major brow
 <b>nvd3</b> - D3 based javascript visualization library.
 
 <b>jqcloud</b> - Javascript plug-in for wordcloud
+
+## System Components
+![alt text](https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/readme-images/system-components.jpg "System Components")
 
 ## Data Source
 [FTP download from NLM bulk distribution for MEDLINE/PubMed](https://www.nlm.nih.gov/databases/download/data_distrib_main.html)
