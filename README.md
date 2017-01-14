@@ -1,4 +1,5 @@
-<img src="https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/images/logos/meshgram-color.png" alt="MeSHgram" height="200" width="50">
+<img src="https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/images/logos/meshgram-color.png" alt="MeSHgram" height="65" width="200">
+
 <b>A tool to visually browse co-occurrence of MeSH terms in PubMeb.</b>
 
 Publications indexed in PubMed have human curated MeSH terms associated with them.
