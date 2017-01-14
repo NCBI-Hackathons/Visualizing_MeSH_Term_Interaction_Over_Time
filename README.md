@@ -36,7 +36,7 @@ Server code was tested in Python 3.5 and Web client was tested in all major brow
 <b>jqcloud</b> - Javascript plug-in for wordcloud
 
 ## System Components
-<img src="https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/readme-images/system-components.jpg" alt="System Components" height="600" width="800">
+<img src="https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/readme-images/system-components.jpg" alt="System Components" height="500" width="800">
 
 ## Data Source
 [FTP download from NLM bulk distribution for MEDLINE/PubMed](https://www.nlm.nih.gov/databases/download/data_distrib_main.html)
