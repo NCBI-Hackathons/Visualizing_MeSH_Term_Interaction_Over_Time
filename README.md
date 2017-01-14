@@ -1,4 +1,4 @@
-[!alt text](https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/images/logos/meshgram-color.!pn)
+![alt text](https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time/blob/master/images/logos/meshgram-color)
 <b>A tool to visually browse co-occurrence of MeSH terms in PubMeb.</b>
 
 Publications indexed in PubMed have human curated MeSH terms associated with them.
