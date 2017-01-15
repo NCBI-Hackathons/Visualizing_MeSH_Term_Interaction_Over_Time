@@ -41,20 +41,27 @@
                 <a class="navbar-brand" href="#"><img src="images/logos/meshgram-white.png" alt="MeSHgram"></a>
                 <div class="navbar-form navbar-left" role="search" style="padding-top: 5px;">
                     <div class="form-group" style="width: 400px;">
-                        <input id="mesh-terms" type="text" class="form-control" placeholder="Enter MeSH terms separated by commas .." style="width: 100%"> 
+                        <input id="mesh-terms" type="text" class="form-control" placeholder="Enter MeSH terms separated by commas .." style="width: 100%" tabindex="1"> 
                     </div>
-                    <div id="viz-button" class="btn btn-default">Visualize</div>
+                    <div id="viz-button" class="btn btn-default" tabindex="2">Visualize</div>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time" target="_blank"><i class="fa fa-github fa-2x"></i></a></li>
+                    <li><a href="https://github.com/NCBI-Hackathons/Visualizing_MeSH_Term_Interaction_Over_Time" target="_blank" tabindex="3"><i class="fa fa-github fa-2x"></i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div id="chart" class='with-3d-shadow with-transitions'>
-        <svg></svg>
+    <div class="row" style="height: 100%">
+        <div class="col-md-3">
+            <h2 style="text-align: center">Popular</h2>
+            <div id="cloud" style="width: 100%; height: 50%; text-align: center;"> </div>
+        </div>
+        <div class="col-md-9" style="height: 100%">
+            <div id="chart" class='with-3d-shadow with-transitions'>
+                <svg></svg>
+            </div>
+        </div>
     </div>
-    <div id="cloud" style="width: 100%; height: 50%; border: 1px solid #ccc; text-align: center;"> </div>
     
     <div class="well well-sm" style="text-align: center">
         Developed with <i class="fa fa-heart fa-lg"></i> at #NCBIHackathon, January 2017.
