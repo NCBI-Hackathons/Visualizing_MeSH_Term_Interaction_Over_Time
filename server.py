@@ -8,6 +8,7 @@ import os, sys, cherrypy
 from pymongo import MongoClient
 from json import dumps
 from cherrypy.lib import static
+from cherrypy.process.plugins import Daemonizer
 from pprint import pprint
 
 path = os.path.abspath(os.path.dirname(__file__))
@@ -81,7 +82,7 @@ def word_cloud(start, end, terms):
     for r in res:
         r['text'] = r['_id']
         del r['_id']
-        r['link'] = "#"
+        r['link'] = 'https://www.ncbi.nlm.nih.gov/pubmed/?term=' + r['text'] + '[MeSH Terms]'
         if r['text'] in terms:
             extend.append(r)
             continue
@@ -117,6 +118,7 @@ class HelloWorld(object):
 
 def server(port):
     'Server initialization'
+    Daemonizer(cherrypy.engine).subscribe()
     cherrypy.server.socket_host = '0.0.0.0'
     cherrypy.config.update({'server.socket_port': int(port)})
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
@@ -129,6 +131,7 @@ def local():
     #pprint(counts('Diabetes Mellitus'))
 
 if __name__ == '__main__':
+    #local(); sys.exit()
     if len(sys.argv) > 1:
         arg = sys.argv[1]
         if arg.isdigit():
