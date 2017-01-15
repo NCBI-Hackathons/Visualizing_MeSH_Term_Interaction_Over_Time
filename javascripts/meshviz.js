@@ -7,6 +7,13 @@ The word cloud widget updates itself with popular word close to the searched MeS
 Author: Abdelrahman Hosny
 */
 
+// Implement carriage return event on input box
+$('#mesh-terms').keyup(function(event){
+    if(event.keyCode == 13){
+        $("#viz-button").click();
+    }
+});
+
 // initializes the word cloud on the first time search
 function setWordCloud(start, end, terms){
     var cloud_url = "/wcloud?start=" + start + "&end=" + end + "&qterms=" + terms;
@@ -80,6 +87,7 @@ $('#viz-button').click(function(sender, e){
     }
     
     $('#viz-button').text('loading ..');
+    $("#viz-button").prop("disabled",true);
     query = query.split(',').join('|');
     query = query.split('_').join(',');
     
@@ -123,7 +131,10 @@ $('#viz-button').click(function(sender, e){
             return chart;
         });
         $('#viz-button').text('Visualize');
+        $("#viz-button").prop("disabled",false);
     }).fail(function(data, error){
+        $('#viz-button').text('Visualize');
+        $("#viz-button").prop("disabled",false);
         alert(JSON.stringify(data));
     });
     
