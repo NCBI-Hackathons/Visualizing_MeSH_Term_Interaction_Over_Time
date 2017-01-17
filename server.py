@@ -30,7 +30,6 @@ def counts(term_str):
     :param term_str: a pipe-separated list of mesh terms.
     :return: the frequencies of the terms by year, formatted for the JS widget
     '''
-    start_year = 1940; end_year = 2016
     try:
         terms = [s.strip() for s in term_str.split('|')]
         if len(terms) > 1:
@@ -41,7 +40,6 @@ def counts(term_str):
             qterms = [s.strip() for s in term_str.split('|')] if '|' in term else [term]
             res = db.article.aggregate([{
                 '$match': {
-                'year': {'$gt': start_year - 1, '$lt': end_year + 1 },
                 'mesh': {'$all': qterms}
             }},{
                 '$group': {
