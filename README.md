@@ -6,6 +6,12 @@ Publications indexed in PubMed have human curated MeSH terms associated with the
 We leverage these MeSH terms and create a visual search tool to find articles in PubMed.
 The idea is that a visual inspection of co-occurrences is helpful for exploratory queries to PubMed.
 
+## We recently launched our website!
+To check out MeSHgram in action go to [meshgram.org](http://meshgram.org/).
+The site is still under development. Please leave your comments / issues here.
+
+Citation details will be posted soon. For now please cite the repository or the website directly.
+
 ## Software Artifacts
 
 Server code was tested in Python 3.5 and Web client was tested in all major browsers except FireFox.
