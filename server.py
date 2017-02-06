@@ -76,21 +76,21 @@ def word_cloud(start, end, terms):
             {'$sort': {'weight': -1}},
     ])
     results = []
-    extend = []
+    extender_list = []
     for r in res:
         r['text'] = r['_id']
         del r['_id']
         r['link'] = 'https://www.ncbi.nlm.nih.gov/pubmed/?term=' + r['text'] + '[MeSH Terms]'
         if r['text'] in terms:
-            extend.append(r)
+            extender_list.append(r)
             continue
         if not r['text'] in mesh_stopwords:
             results.append(r)
     results = results[:25]
-    results.extend(extend)
+    results.extend(extender_list)
     return dumps(results)
 
-class HelloWorld(object):
+class MeshGramServer(object):
 
     @cherrypy.expose()
     def freqs(self, terms):
@@ -121,7 +121,7 @@ def server(port):
     cherrypy.config.update({'server.socket_port': int(port)})
     cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
     cherrypy.response.headers["Access-Control-Allow-Headers"] = "X-Requested-With"
-    cherrypy.quickstart(HelloWorld(), '/', 'config.txt')
+    cherrypy.quickstart(MeshGramServer(), '/', 'config.txt')
 
 def local():
     #print(counts('Electroretinography;Neoplasm Metastasis'))
